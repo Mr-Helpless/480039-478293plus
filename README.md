@@ -1,22 +1,3 @@
- 
-Greasy Fork
-Mr-Helpless [ 退出 ] 
-简体中文 (zh-CN)
-脚本列表 论坛 站点帮助 更多
-信息
-代码
-历史版本
-反馈 (0)
-统计数据
-相似脚本
-更新脚本
-删除脚本
-管理
-478293plus
-更方便的 478293 plus 480039
-
-安装此脚本?
-提问、发表评价，或者 举报这个脚本。
 // ==UserScript==
 // @name         478293plus
 // @namespace    http://tampermonkey.net/
