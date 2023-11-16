@@ -1,15 +1,3 @@
-// ==UserScript==
-// @name         478293plus
-// @namespace    http://tampermonkey.net/
-// @version      1.0
-// @description  更方便的 478293 plus 480039
-// @author       You
-// @match        http*://zwyy.qdexam.com/www/index.htm*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=qdexam.com
-// @grant        none
-// @license      GPL3.0
-// ==/UserScript==
- 
 (function() {
     'use strict';
  
