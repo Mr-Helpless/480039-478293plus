@@ -1,12 +1,13 @@
-// code
+//hello
+
 (function() {
     'use strict';
 
     //测试版本
+    var replce=function(){
+        document.querySelector("body > div.app.has-head.has-banner.ng-scope > div.app-head > ul:nth-child(2)").style="height: 3rem;"
 
-    document.querySelector("body > div.app.has-head.has-banner.ng-scope > div.app-head > ul:nth-child(2)").style="height: 3rem;"
-
-    var my_html=`
+        var my_html=`
 				<li class="col v-t" style="width:auto; padding-left: 5px;">
 					<a class="btn btn-opatiy btn-conner has-icon c-b" style="width: 100%;text-align: center" ng-show="buildingReservationType!=1" ng-click="subscribeDay();" onclick="window.extendDay();" href="javaScript:void(0);"><img align="absmiddle" src="img/ion-clock.png">我要预约</a>
 					<a class="btn btn-opatiy btn-conner has-icon c-b ng-hide" style="width: 100%;text-align: center" ng-show="buildingReservationType==1" ng-click="reservationShow();" href="javaScript:void(0);"><img align="absmiddle" src="img/ion-clock.png">我要预约</a>
@@ -16,14 +17,19 @@
 				</li>
 
 			`
-    var dom=document.createElement('ul');
-    dom.className="row"
-    dom.style="height: 6rem;"
-    dom.innerHTML=my_html
-    document.querySelector("body > div.app.has-head.has-banner.ng-scope > div.app-head").appendChild(dom)
+        var dom=document.createElement('ul');
+        dom.className="row"
+        dom.style="height: 6rem;"
+        dom.innerHTML=my_html
+        document.querySelector("body > div.app.has-head.has-banner.ng-scope > div.app-head").appendChild(dom)
 
-    //删除原有标签
-    document.querySelector("body > div.app.has-head.has-banner.ng-scope > div.app-head > ul:nth-child(2)").remove()
+        //删除原有标签
+        document.querySelector("body > div.app.has-head.has-banner.ng-scope > div.app-head > ul:nth-child(2)").remove()
+
+    }
+    if(document.querySelector("body > div.app.has-head.has-banner.ng-scope > div.app-head > ul:nth-child(2) > li:nth-child(1) > a:nth-child(1)").getAttribute("onclick")==null){
+        replce()
+    }
     //公共方法
     function diffDay(lastDate,earlyDate){
             var startDate = new Date(new Date(earlyDate).Format("yyyy-MM-dd"));
