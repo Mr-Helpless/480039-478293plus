@@ -1,3 +1,4 @@
+// code
 (function() {
     'use strict';
 
@@ -82,7 +83,7 @@
     var click_num=-1
     var day_list=[]
     var Reservation=window.Api.selectReservationByUser();
-
+    var NoReservation=0
     //续约模块
     window.extendDay =function () {
         click_num+=1
@@ -121,6 +122,9 @@
             }
             if(result_json.success){
                 //alert("预约成功")
+                if(NoReservation==1){
+                    location.reload();
+                }
             }
             else{
                // console.log("------->",result_json)
@@ -137,19 +141,24 @@
             day_list=Array.from({length: 5}, () => 2);
             //console.log(Reservation)
             if (typeof Reservation.list === "undefined"){
-                console.log("用户没有预约")
+                console.log("用户没有预约");
+                NoReservation=1;
                 return 0;
             }
+            var curday=new Date();
+
+
             for (let index = 0; index < Reservation.list.length; index++) {
                 tmp_time_timeDay=Reservation.list[index].time
                 //alert(tmp_time_timeDay)
-                var curday=new Date();
                 var t=diffDay((new Date(tmp_time_timeDay.split(" - ")[0])).Format("yyyy-MM-dd"),curday)
-                if(index==0 && curday.getHours()<22 && curday.getHours()>8){
+                console.log(tmp_time_timeDay.split(" - ")[0]+">>与第"+index+"天"+new Date().Format("yyyy-MM-dd")+"相差"+t+"天")
+
+                if(t==0&& curday.getHours()<22 && curday.getHours()>8){
                     day_list[t]=2
+                    console.log(new Date(tmp_time_timeDay.split(" - ")[0]))
                     continue;
                 }
-                console.log(tmp_time_timeDay.split(" - ")[0]+">>与第"+index+"天"+new Date().Format("yyyy-MM-dd")+"相差"+t+"天")
                 day_list[t]=1
                 //对于有记录的那天进行记录 1为有记录
             }
@@ -158,7 +167,7 @@
 
         var tomain = function () {
             //getReservation_ID()
-            getOkDay()
+            getOkDay();
             console.log(day_list)
 
             for (var index = 0,tmp=0; index < day_list.length; index++) {
@@ -186,12 +195,12 @@
         window.myCheckIn()
         console.log("自动签到结束")
         //八点后自动预约
-//         if(new Date().getHours()>20){
-//             //20点以后打开才自动执行
-//             console.log("自动预约开始")
-//             window.extendDay()
-//             console.log("自动预约结束")
-//         }
+        if(new Date().getHours()>20){
+            //20点以后打开才自动执行
+            console.log("自动预约开始")
+            window.extendDay()
+            console.log("自动预约结束")
+        }
      window.alert=window.myalert
     //----------自动操作---------
     //通知
