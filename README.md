@@ -1,7 +1,3 @@
-//hello
-
-(function() {
-    'use strict';
 
     //测试版本
     var replce=function(){
@@ -54,6 +50,7 @@
         }else{
             for (let index = 0; index < Reservation.list.length; index++) {
                 var tmp_time_timeDay=Reservation.list[index].time
+                console.log(Reservation.list[index].time)
                 if(diffDay((new Date(tmp_time_timeDay.split(" - ")[0])).Format("yyyy-MM-dd"),new Date())==0){
                     //console.log(Reservation.list[index].time)
                     var tmp_reseveation=Reservation.list[index]
@@ -82,6 +79,8 @@
                         //break;
                     }
 
+                }else{
+                    alert("不用签到")
                 }
             }
         }
@@ -122,14 +121,14 @@
                 result_json=window.Api.extendSeatTimeDay(Reservation_ID,End_time,new Date(new Date().getTime()+60*1000).Format("yyyy-MM-dd HH:mm:ss"))
                 //
 
-               // location.reload(true);//刷新整个网页
+               // location.reload();//刷新整个网页
             }else{
                 result_json=window.Api.extendSeatTimeDay(Reservation_ID,End_time,Frist_time)
             }
             if(result_json.success){
                 //alert("预约成功")
                 if(NoReservation==1){
-                    location.reload(true);
+                    location.reload();
                 }
             }
             else{
@@ -201,7 +200,7 @@
         window.myCheckIn()
         console.log("自动签到结束")
         //八点后自动预约
-        if(new Date().getHours()>20){
+        if(new Date().getHours()>8){
             //20点以后打开才自动执行
             console.log("自动预约开始")
             window.extendDay()
@@ -210,8 +209,3 @@
      window.alert=window.myalert
     //----------自动操作---------
     //通知
-
-
-}
-
-)();
