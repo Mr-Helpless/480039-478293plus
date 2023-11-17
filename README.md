@@ -122,14 +122,14 @@
                 result_json=window.Api.extendSeatTimeDay(Reservation_ID,End_time,new Date(new Date().getTime()+60*1000).Format("yyyy-MM-dd HH:mm:ss"))
                 //
 
-               // location.reload();//刷新整个网页
+               // location.reload(true);//刷新整个网页
             }else{
                 result_json=window.Api.extendSeatTimeDay(Reservation_ID,End_time,Frist_time)
             }
             if(result_json.success){
                 //alert("预约成功")
                 if(NoReservation==1){
-                    location.reload();
+                    location.reload(true);
                 }
             }
             else{
