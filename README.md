@@ -127,7 +127,7 @@
             if(result_json.success){
                 //alert("预约成功")
                 if(NoReservation==1){
-		   // alert("请刷新页面则按钮功能可能失效")
+		   	alert("ipad请手动刷新页面")
      			//confirm("刷新")
                     location.reload();
                 }
