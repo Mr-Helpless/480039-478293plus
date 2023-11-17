@@ -127,6 +127,7 @@
             if(result_json.success){
                 //alert("预约成功")
                 if(NoReservation==1){
+		alert("请刷新页面则按钮功能可能失效")
                     location.reload();
                 }
             }
@@ -199,7 +200,7 @@
         window.myCheckIn()
         console.log("自动签到结束")
         //八点后自动预约
-        if(new Date().getHours()>8){
+        if(new Date().getHours()>20){
             //20点以后打开才自动执行
             console.log("自动预约开始")
             window.extendDay()
