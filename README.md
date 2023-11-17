@@ -1,10 +1,10 @@
 (function() {
     'use strict';
- 
-    //版本
- 
+
+    //测试版本
+
     document.querySelector("body > div.app.has-head.has-banner.ng-scope > div.app-head > ul:nth-child(2)").style="height: 3rem;"
- 
+
     var my_html=`
 				<li class="col v-t" style="width:auto; padding-left: 5px;">
 					<a class="btn btn-opatiy btn-conner has-icon c-b" style="width: 100%;text-align: center" ng-show="buildingReservationType!=1" ng-click="subscribeDay();" onclick="window.extendDay();" href="javaScript:void(0);"><img align="absmiddle" src="img/ion-clock.png">我要预约</a>
@@ -13,21 +13,21 @@
 				<li class="col t-r v-t" style="padding-left: 5px;">
 					<a class="btn btn-opatiy btn-conner has-icon c-b" style="width: 100%;text-align: center" ng-show="buildingReservationType!=0&amp;&amp;campusId!=58" ng-click="SweepCode();" onclick="window.myCheckIn();" href="javaScript:void(0);"><img align="absmiddle" src="img/take-code.png">扫码就坐</a>
 				</li>
- 
+
 			`
     var dom=document.createElement('ul');
     dom.className="row"
     dom.style="height: 6rem;"
     dom.innerHTML=my_html
     document.querySelector("body > div.app.has-head.has-banner.ng-scope > div.app-head").appendChild(dom)
- 
+
     //删除原有标签
     document.querySelector("body > div.app.has-head.has-banner.ng-scope > div.app-head > ul:nth-child(2)").remove()
     //公共方法
     function diffDay(lastDate,earlyDate){
             var startDate = new Date(new Date(earlyDate).Format("yyyy-MM-dd"));
             var endDate = new Date(new Date(lastDate).Format("yyyy-MM-dd"));
- 
+
             if (startDate>endDate){
                 return 0;
             }
@@ -74,7 +74,7 @@
                         alert("已经签到不用签到")
                         //break;
                     }
- 
+
                 }
             }
         }
@@ -82,7 +82,7 @@
     var click_num=-1
     var day_list=[]
     var Reservation=window.Api.selectReservationByUser();
- 
+
     //续约模块
     window.extendDay =function () {
         click_num+=1
@@ -90,8 +90,8 @@
         var Reservation_ID=0
         var tmp_time_timeDay=""
         var go=true
- 
- 
+
+
         var getReservation_ID=function () {
             if(Reservation.success){//判断当天是否有记录优先使用最后一条记录的座位号
                // console.log(Reservation.success+"进入")
@@ -113,7 +113,9 @@
                 //今天特殊预约yyyy-mm-dd hh:mm:ss
                 console.log("今天预约",End_time,new Date(new Date().getTime()+60*1000))
                 result_json=window.Api.extendSeatTimeDay(Reservation_ID,End_time,new Date(new Date().getTime()+60*1000).Format("yyyy-MM-dd HH:mm:ss"))
-                location.reload();//刷新整个网页
+                //
+
+               // location.reload();//刷新整个网页
             }else{
                 result_json=window.Api.extendSeatTimeDay(Reservation_ID,End_time,Frist_time)
             }
@@ -122,14 +124,14 @@
             }
             else{
                // console.log("------->",result_json)
- 
+
                 alert(JSON.stringify(result_json.success)+"\t"+
                       date_day+"\t"+
                       JSON.stringify(result_json.message)
                      )
             }
             document.querySelector("#loadingToast").click()//刷新子页面
- 
+
         }
         var getOkDay=function(){
             day_list=Array.from({length: 5}, () => 2);
@@ -141,29 +143,28 @@
             for (let index = 0; index < Reservation.list.length; index++) {
                 tmp_time_timeDay=Reservation.list[index].time
                 //alert(tmp_time_timeDay)
-               // var t=diffDay((new Date(tmp_time_timeDay.split(" - ")[0])).Format("yyyy-MM-dd"),new Date())
-               	var curday=new Date();
+                var curday=new Date();
                 var t=diffDay((new Date(tmp_time_timeDay.split(" - ")[0])).Format("yyyy-MM-dd"),curday)
                 if(index==0 && curday.getHours()<22 && curday.getHours()>8){
                     day_list[t]=2
                     continue;
                 }
-		console.log(tmp_time_timeDay.split(" - ")[0]+">>与第"+index+"天"+new Date().Format("yyyy-MM-dd")+"相差"+t+"天")
+                console.log(tmp_time_timeDay.split(" - ")[0]+">>与第"+index+"天"+new Date().Format("yyyy-MM-dd")+"相差"+t+"天")
                 day_list[t]=1
                 //对于有记录的那天进行记录 1为有记录
             }
             //console.log(day_list)
         }
- 
+
         var tomain = function () {
             //getReservation_ID()
             getOkDay()
             console.log(day_list)
- 
+
             for (var index = 0,tmp=0; index < day_list.length; index++) {
- 
+
                 if(day_list[index]==2){
- 
+
                     if(click_num==tmp){
                         toReservation(index)
                         console.log(click_num+"--->"+index+">>>"+day_list[index])
@@ -171,11 +172,11 @@
                     }
                     tmp+=1
                 }
- 
+
             }
         }
         tomain()
- 
+
     };
     //----------自动操作---------
       window.myalert= function () { }
@@ -185,18 +186,17 @@
         window.myCheckIn()
         console.log("自动签到结束")
         //八点后自动预约
-        if(new Date().getHours()>20){
-            //20点以后打开才自动执行
-            console.log("自动预约开始")
-            window.extendDay()
-            console.log("自动预约结束")
-        }
+//         if(new Date().getHours()>20){
+//             //20点以后打开才自动执行
+//             console.log("自动预约开始")
+//             window.extendDay()
+//             console.log("自动预约结束")
+//         }
      window.alert=window.myalert
     //----------自动操作---------
     //通知
- 
- 
-}
- 
-)();
 
+
+}
+
+)();
