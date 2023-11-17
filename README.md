@@ -141,8 +141,14 @@
             for (let index = 0; index < Reservation.list.length; index++) {
                 tmp_time_timeDay=Reservation.list[index].time
                 //alert(tmp_time_timeDay)
-                var t=diffDay((new Date(tmp_time_timeDay.split(" - ")[0])).Format("yyyy-MM-dd"),new Date())
-                console.log(tmp_time_timeDay.split(" - ")[0]+">>与第"+index+"天"+new Date().Format("yyyy-MM-dd")+"相差"+t+"天")
+               // var t=diffDay((new Date(tmp_time_timeDay.split(" - ")[0])).Format("yyyy-MM-dd"),new Date())
+               	var curday=new Date();
+                var t=diffDay((new Date(tmp_time_timeDay.split(" - ")[0])).Format("yyyy-MM-dd"),curday)
+                if(index==0 && curday.getHours()<22 && curday.getHours()>8){
+                    day_list[t]=2
+                    continue;
+                }
+		console.log(tmp_time_timeDay.split(" - ")[0]+">>与第"+index+"天"+new Date().Format("yyyy-MM-dd")+"相差"+t+"天")
                 day_list[t]=1
                 //对于有记录的那天进行记录 1为有记录
             }
